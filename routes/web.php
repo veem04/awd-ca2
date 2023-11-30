@@ -35,10 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('game_list', GameListController::class);
 });
 
-Route::middleware('admin')->group(function (){
+// Route::middleware('admin')->group(function (){
     Route::resource('games', GameController::class);
     Route::resource('publishers', PublisherController::class);
     Route::resource('genres', GenreController::class);
-});
+// });
 
 require __DIR__.'/auth.php';

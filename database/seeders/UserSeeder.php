@@ -20,14 +20,12 @@ class UserSeeder extends Seeder
         $admin->name = 'vi';
         $admin->email = 'N00220460@iadt.ie';
         $admin->password = 'secret123';
-        $admin->is_admin = true;
         $admin->save();
 
         $notAdmin = new User;
         $notAdmin->name = 'powerless';
         $notAdmin->email = 'example@example.com';
         $notAdmin->password = 'example';
-        $notAdmin->is_admin = false;
         $notAdmin->save();
 
         User::factory()

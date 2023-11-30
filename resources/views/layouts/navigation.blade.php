@@ -21,7 +21,7 @@
                         {{ __('My Games') }}
                     </x-nav-link>
                 </div>
-                @if (Auth::user()->is_admin)
+                {{-- @if (Auth::user()->is_admin) --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('games.index')" :active="request()->routeIs('games.*')">
                         {{ __('Games DB') }}
@@ -37,7 +37,7 @@
                         {{ __('Genres') }}
                     </x-nav-link>
                 </div>
-                @endif
+                {{-- @endif --}}
             </div>
 
             <!-- Settings Dropdown -->

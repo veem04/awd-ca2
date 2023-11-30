@@ -27,14 +27,6 @@ class GameListController extends Controller
     public function show(string $id)
     {
         $entry = GameEntry::FindOrFail($id);
-        
-        // denies the user access if the entry isn't associated with their account
-        // this should probably be done with middleware i think
-        // But i wasn't sure how exactly and was running out of time
-        if($entry->user_id !== Auth::user()->id && !Auth::user()->is_admin){
-            return redirect(route('game_list.index'))
-            ->with('unauthorised', 'You are not authorised to access that page.');
-        }
 
         return view('game_list.show', [
             'entry' => $entry
@@ -108,11 +100,6 @@ class GameListController extends Controller
     public function edit(string $id)
     {
         $entry = GameEntry::FindOrFail($id);
-        // Denies the user access if the entry isn't associated with their account
-        if($entry->user_id !== Auth::user()->id && !Auth::user()->is_admin){
-            return redirect(route('game_list.index'))
-            ->with('unauthorised', 'You are not authorised to access that page.');
-        }
 
         // returns the view with the entry and enum
         return view('game_list.edit', [
