@@ -33,7 +33,7 @@ class GameEntryFactory extends Factory
             'start_date' => $startDate,
             'end_date' => $endDate,
             'score' => $this->faker->randomDigit(),
-            'review' => $this->faker->text(100),
+            'review' => $this->faker->realText(100),
         ];
     }
 }
