@@ -10,8 +10,8 @@ class Genre extends Model
 {
     use HasFactory;
 
-    // public function games(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Game::class);
-    // }
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class);
+    }
 }

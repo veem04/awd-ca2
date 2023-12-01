@@ -15,15 +15,19 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Description</th>
+                <th>Address</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @forelse($publishers as $publisher)
             <tr>
-                <th scope='row'>{{$publisher->name}}</th>
-                <td>
-                    <div class='my-2.5'>
+                <th class='whitespace-nowrap' scope='row'>{{$publisher->name}}</th>
+                <td>{{$publisher->description}}</td>
+                <td>{{$publisher->address}}</td>
+                <td class='whitespace-nowrap'>
+                    <div class='m-2.5'>
                     <a href='{{ route('publishers.show', $publisher->id) }}' 
                         class='px-3 py-3 font-medium text-white bg-blue-600 rounded-md duration-300 hover:bg-blue-800'>
                         See more
