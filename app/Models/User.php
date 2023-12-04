@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Game::class);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
 }
