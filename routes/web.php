@@ -7,6 +7,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GameListController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\Admin\GameController as AdminGameController;
 use App\Http\Controllers\User\GameController as UserGameController;
@@ -28,15 +29,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::resource('game_list', GameListController::class);
-    // Route::resource('games', GameController::class);
-    // Route::resource('publishers', PublisherController::class);
-    // Route::resource('genres', GenreController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
