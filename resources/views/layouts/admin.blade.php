@@ -29,7 +29,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class='mx-20 my-10'>
+            <main class='max-w-7xl mx-auto mt-4'>
                 @yield('content')
             </main>
         </div>

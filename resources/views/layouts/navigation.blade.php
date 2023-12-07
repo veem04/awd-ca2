@@ -21,21 +21,21 @@
                         {{ __('My Games') }}
                     </x-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('games.index')" :active="request()->routeIs('games.*')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.games.index')" :active="request()->routeIs('user.games.*')">
                         {{ __('Games DB') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('publishers.index')" :active="request()->routeIs('publishers.*')">
+                    <x-nav-link :href="route('user.publishers.index')" :active="request()->routeIs('user.publishers.*')">
                         {{ __('Publishers') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('genres.index')" :active="request()->routeIs('genres.*')">
+                    <x-nav-link :href="route('user.genres.index')" :active="request()->routeIs('user.genres.*')">
                         {{ __('Genres') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

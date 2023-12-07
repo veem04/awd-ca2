@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\PublisherController;
+// use App\Http\Controllers\GameController;
+// use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GameListController;
 use App\Http\Controllers\HomeController;
@@ -11,6 +11,12 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\Admin\GameController as AdminGameController;
 use App\Http\Controllers\User\GameController as UserGameController;
+
+use App\Http\Controllers\Admin\PublisherController as AdminPublisherController;
+use App\Http\Controllers\User\PublisherController as UserPublisherController;
+
+use App\Http\Controllers\Admin\GenreController as AdminGenreController;
+use App\Http\Controllers\User\GenreController as UserGenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +57,23 @@ Route::resource('/user/games', UserGameController::class)
 Route::resource('/admin/games', AdminGameController::class)
     ->middleware(['auth', 'role:admin'])
     ->names('admin.games');
+
+Route::resource('/user/publishers', UserPublisherController::class)
+    ->middleware(['auth'])
+    ->names('user.publishers')
+    ->only(['index', 'show']);
+
+Route::resource('/admin/publishers', AdminPublisherController::class)
+    ->middleware(['auth', 'role:admin'])
+    ->names('admin.publishers');
+
+Route::resource('/user/genres', UserGenreController::class)
+    ->middleware(['auth'])
+    ->names('user.genres')
+    ->only(['index', 'show']);
+
+Route::resource('/admin/genres', AdminGenreController::class)
+    ->middleware(['auth', 'role:admin'])
+    ->names('admin.genres');
 
 require __DIR__.'/auth.php';

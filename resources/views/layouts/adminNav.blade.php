@@ -22,20 +22,20 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.games.index')" :active="request()->routeIs('games.*')">
+                    <x-nav-link :href="route('admin.games.index')" :active="request()->routeIs('admin.games.*')">
                         {{ __('Games DB') }}
                     </x-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.publishers.index')" :active="request()->routeIs('publishers.*')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.publishers.index')" :active="request()->routeIs('admin.publishers.*')">
                         {{ __('Publishers') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.genres.index')" :active="request()->routeIs('genres.*')">
+                    <x-nav-link :href="route('admin.genres.index')" :active="request()->routeIs('admin.genres.*')">
                         {{ __('Genres') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
