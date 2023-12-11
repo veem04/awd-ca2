@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\Publisher;
 use App\Models\Genre;
 use Storage;
+use DB;
 
 class GameController extends Controller
 {
@@ -92,8 +93,14 @@ class GameController extends Controller
     public function show(string $id)
     {
         $game = Game::FindOrFail($id);
+        $entries = DB::table('game_user')
+            ->where('game_id', $id)
+            ->join('users', 'users.id', '=', 'game_user.user_id')
+            ->paginate(10);
+
         return view('admin.games.show', [
-            'game' => $game
+            'game' => $game,
+            'entries' => $entries,
         ]);
     }
 

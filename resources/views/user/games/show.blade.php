@@ -36,4 +36,41 @@
         <img src='{{asset('storage/images/'.$game->image)}}'>
     </div>
     @endif
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h4 class="h4 font-bold">Reviews of {{ $game->title }}</h4>
+            @forelse ($entries as $entry)
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg my-3">
+                <div class="p-6 text-gray-900">
+                    <div class="d-flex justify-content-between">
+                        <div class="h5 text-bold">
+                            {{ $entry->name }}
+                        </div>
+                        @php
+                            switch (true) {
+                                case $entry->score < 6:
+                                    $colour = 'red';
+                                    break;
+                                default:
+                                    $colour = 'green';
+                                    break;
+                                // i tried to have a yellow case but none of yellow, orange or amber bg would work
+                            }
+                        @endphp
+                        <div class="d-flex h5 text-bold text-white sm:rounded-lg bg-{{$colour}}-600" style='width:40px; height:40px;'>
+                            <p class='m-auto'>{{ $entry->score }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        {{ $entry->review }}
+                    </div>
+                </div>
+            </div>
+            {{ $entries->links() }}
+            @empty
+            No reviews were found.
+            @endforelse
+        </div>
+    </div>
 @endsection

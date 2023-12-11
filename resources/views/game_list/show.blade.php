@@ -1,4 +1,4 @@
-@extends('layouts.myApp')
+@extends('layouts.userOrAdmin')
 
 @section('header')
 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,7 +13,13 @@
     <h1 class="font-bold text-2xl">Game details</h1>
 
     <div class='d-inline-block w-25 align-top'>
-        <h2 class='font-semibold text-lg my-2'>Game: {{ $game->title }}</h2>
+        <h2 class='font-semibold text-lg my-2'>Game: 
+            <a 
+            class='text-blue-500 hover:underline'
+            href="{{route(Auth::user()->hasRole('admin') ? 'admin.games.show' : 'user.games.show', $game->id)}} ">
+                {{ $game->title }}
+            </a>
+        </h2>
 
         <p class='my-2'>
             <span class='font-semibold'>Publisher:</span>
