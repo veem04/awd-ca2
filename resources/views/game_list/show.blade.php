@@ -76,7 +76,11 @@
     
     @if ($game->image)
     <div class='d-inline-block w-25'>
-        <img src='{{asset('storage/images/'.$game->image)}}'>
+        <a 
+        class='text-blue-500 hover:underline'
+        href="{{route(Auth::user()->hasRole('admin') ? 'admin.games.show' : 'user.games.show', $game->id)}} ">
+            <img src='{{asset('storage/images/'.$game->image)}}'>
+        </a>
     </div>
     @endif
 

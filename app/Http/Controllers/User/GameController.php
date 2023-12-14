@@ -33,10 +33,12 @@ class GameController extends Controller
             ->where('game_id', $id)
             ->join('users', 'users.id', '=', 'game_user.user_id')
             ->paginate(10);
+            $avgScore = DB::table('game_user')->where('game_id', $id)->avg('score');
 
         return view('user.games.show', [
             'game' => $game,
             'entries' => $entries,
+            'avgScore' => $avgScore,
         ]);
     }
 }

@@ -55,7 +55,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h4 class="h4 font-bold">Reviews of {{ $game->title }}</h4>
+            
+            <div class="d-flex justify-content-between">
+                <h4 class="h4 font-bold">Reviews of {{ $game->title }}</h4>
+                <h4 class="h4 font-bold">Average score: {{ $avgScore }}</h4>
+            </div>
+
             @forelse ($entries as $entry)
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg my-3">
                 <div class="p-6 text-gray-900">
@@ -65,13 +70,15 @@
                         </div>
                         @php
                             switch (true) {
-                                case $entry->score < 6:
+                                case $entry->score < 4:
                                     $colour = 'red';
+                                    break;
+                                case $entry->score < 7:
+                                    $colour = 'yellow';
                                     break;
                                 default:
                                     $colour = 'green';
                                     break;
-                                // i tried to have a yellow case but none of yellow, orange or amber bg would work
                             }
                         @endphp
                         
@@ -89,7 +96,7 @@
                                 {{-- there's some code here to display a tooltip that doesn't work --}}
                             @endif
                             
-                            
+                            {{-- the bg class here is extremely finicky with when it wants to work and i don't know why --}}
                             <div class="d-flex h5 mb-0 text-bold text-white sm:rounded-lg bg-{{$colour}}-600" style='width:40px; height:40px;'>
                                 <p class='m-auto'>{{ $entry->score }}</p>
                             </div>
