@@ -50,16 +50,19 @@ class User extends Authenticatable
         return $this->belongsToMany(Game::class);
     }
 
+    // each user has many roles
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_role');
     }
 
+    // checks if a user has a specific role
     public function hasRole($role)
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
 
+    // checks if a user has any role in an array
     public function hasAnyRole($roles)
     {
         return null !== $this->roles()->whereIn('name', $roles)->first();

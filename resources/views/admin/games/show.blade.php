@@ -97,7 +97,7 @@
                             @endif
                             
                             {{-- the bg class here is extremely finicky with when it wants to work and i don't know why --}}
-                            <div class="d-flex h5 mb-0 text-bold text-white sm:rounded-lg bg-{{$colour}}-600" style='width:40px; height:40px;'>
+                            <div class="d-flex h5 mb-0 text-bold text-white sm:rounded-lg bg-{{ $colour }}-600" style='width:40px; height:40px;'>
                                 <p class='m-auto'>{{ $entry->score }}</p>
                             </div>
                         </div>

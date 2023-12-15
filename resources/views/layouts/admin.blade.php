@@ -28,10 +28,27 @@
                 </div>
             </header>
 
+            
+
             <!-- Page Content -->
+
+            {{-- flash message --}}
+            @if(session('status'))
+                <div id='alert' class='mx-20 mb-5 alert alert-primary' role='alert'>
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <main class='max-w-7xl mx-auto mt-4'>
                 @yield('content')
             </main>
         </div>
     </body>
+
+    <script>
+    let alert = document.getElementById('alert');
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
+    </script>
 </html>

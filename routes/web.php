@@ -41,6 +41,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::middleware('auth')->group(function () {
     Route::resource('game_list', GameListController::class);
+    Route::resource('/user/games', UserGameController::class)->names('user.games')->only(['index', 'show']);
+    Route::resource('/user/publishers', UserPublisherController::class)->names('user.publishers')->only(['index', 'show']);
+    Route::resource('/user/genres', UserGenreController::class)->names('user.genres')->only(['index', 'show']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,31 +52,20 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-Route::resource('/user/games', UserGameController::class)
-    ->middleware(['auth'])
-    ->names('user.games')
-    ->only(['index', 'show']);
+Route::middleware(['auth', 'role:admin'])->group(function (){
+    Route::resource('/admin/games', AdminGameController::class)->names('admin.games');
+    Route::resource('/admin/publishers', AdminPublisherController::class)->names('admin.publishers');
+    Route::resource('/admin/genres', AdminGenreController::class)->names('admin.genres');
+});
 
-Route::resource('/admin/games', AdminGameController::class)
-    ->middleware(['auth', 'role:admin'])
-    ->names('admin.games');
 
-Route::resource('/user/publishers', UserPublisherController::class)
-    ->middleware(['auth'])
-    ->names('user.publishers')
-    ->only(['index', 'show']);
 
-Route::resource('/admin/publishers', AdminPublisherController::class)
-    ->middleware(['auth', 'role:admin'])
-    ->names('admin.publishers');
 
-Route::resource('/user/genres', UserGenreController::class)
-    ->middleware(['auth'])
-    ->names('user.genres')
-    ->only(['index', 'show']);
 
-Route::resource('/admin/genres', AdminGenreController::class)
-    ->middleware(['auth', 'role:admin'])
-    ->names('admin.genres');
+
+
+
+
+
 
 require __DIR__.'/auth.php';

@@ -93,10 +93,14 @@ class GameController extends Controller
     public function show(string $id)
     {
         $game = Game::FindOrFail($id);
+
+        // gets all entries about this specific game
         $entries = DB::table('game_user')
             ->where('game_id', $id)
             ->join('users', 'users.id', '=', 'game_user.user_id')
             ->paginate(10);
+
+        // gets the average score of the specific game id
         $avgScore = DB::table('game_user')->where('game_id', $id)->avg('score');
 
         return view('admin.games.show', [
@@ -154,10 +158,13 @@ class GameController extends Controller
         $game->publisher_id = $request->publisher;
         // code for image upload
         if ($request->image) {
+            // deletes the existing image
             if(Storage::exists('public/images/'.$game->image)){
                 Storage::delete('public/images/'.$game->image);
             }
+            // image name is the timestamp + the provided file extension
             $imageName = time().'.'.$request->image->extension();
+            // stores the file in public/images as the image name
             Storage::putFileAs('public/images', $request->image,  $imageName);
             $game->image = $imageName;
         }
@@ -182,6 +189,7 @@ class GameController extends Controller
     public function destroy(string $id)
     {
         $game = Game::findOrFail($id);
+        // detaches all the genres from the game
         $game->genres()->detach();
         $game->delete();
 

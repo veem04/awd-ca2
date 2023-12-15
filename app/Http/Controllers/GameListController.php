@@ -27,6 +27,7 @@ class GameListController extends Controller
     public function show(string $id)
     {
         $entry = GameEntry::FindOrFail($id);
+        // checks if the user doesnt own the entry and also isnt an admin
         if(Auth::id() !== $entry->user_id && !Auth::user()->hasRole('admin')){
             return to_route('game_list.index');
         }

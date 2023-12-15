@@ -15,6 +15,7 @@ class AuthRole
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
+        // checks if the user doesn't have the roles passed through
         if (!$request->user() || !$request->user()->hasAnyRole($roles)) {
             {
                 return redirect()->route('home.index');

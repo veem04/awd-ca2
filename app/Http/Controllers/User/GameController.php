@@ -29,10 +29,14 @@ class GameController extends Controller
     public function show(string $id)
     {
         $game = Game::FindOrFail($id);
+
+        // gets all entries about this specific game
         $entries = DB::table('game_user')
             ->where('game_id', $id)
             ->join('users', 'users.id', '=', 'game_user.user_id')
             ->paginate(10);
+
+            // gets the average score of the specific game id
             $avgScore = DB::table('game_user')->where('game_id', $id)->avg('score');
 
         return view('user.games.show', [
