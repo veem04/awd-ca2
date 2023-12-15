@@ -27,7 +27,10 @@ class GameListController extends Controller
     public function show(string $id)
     {
         $entry = GameEntry::FindOrFail($id);
-
+        if(Auth::id() !== $entry->user_id && !Auth::user()->hasRole('admin')){
+            return to_route('game_list.index');
+        }
+        
         return view('game_list.show', [
             'entry' => $entry
         ]);
@@ -100,6 +103,9 @@ class GameListController extends Controller
     public function edit(string $id)
     {
         $entry = GameEntry::FindOrFail($id);
+        if(Auth::id() !== $entry->user_id && !Auth::user()->hasRole('admin')){
+            return to_route('game_list.index');
+        }
 
         // returns the view with the entry and enum
         return view('game_list.edit', [
@@ -113,6 +119,11 @@ class GameListController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $entry = GameEntry::findOrFail($id);
+        if(Auth::id() !== $entry->user_id && !Auth::user()->hasRole('admin')){
+            return to_route('game_list.index');
+        }
+
         $rules = [
             'status' => ['required', Rule::in(GameEntry::$statusEnum)],
             'start_date' => 'nullable|date|before_or_equal:'.date('Y-m-d'),
@@ -130,7 +141,6 @@ class GameListController extends Controller
 
         $request->validate($rules, $messages);
 
-        $entry = GameEntry::findOrFail($id);
         $entry->status = $request->status;
         $entry->start_date = $request->start_date;
         $entry->end_date = $request->end_date;
@@ -150,6 +160,9 @@ class GameListController extends Controller
     public function destroy(string $id)
     {
         $entry = GameEntry::findOrFail($id);
+        if(Auth::id() !== $entry->user_id && !Auth::user()->hasRole('admin')){
+            return to_route('game_list.index');
+        }
         $entry->delete();
 
         return redirect()
